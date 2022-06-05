@@ -54,5 +54,10 @@ sudo apt-get install -y google-cloud-sdk
 
 # END Install the Google Cloud SDK
 
+# Setup SSH private key from google secrets
+sudo gcloud secrets versions access 1 --secret="GITHUB-PRIVATE-KEY" > ~/.ssh/id_rsa
+sudo chmod 600 ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_rsa
+
 # Install Visual Studio Code
 sudo snap install --classic code
