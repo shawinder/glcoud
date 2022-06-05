@@ -41,6 +41,7 @@ gcloud compute firewall-rules create $FIREWALL_HTTPS \
 wget https://raw.githubusercontent.com/shawinder/glcoud/main/vm/dev-machine.sh
 
 gcloud compute instances create $INSTANCE \
+ --scopes=cloud-platform \
  --project=$PROJECT \
  --zone=$REGION-b \
  --machine-type=n1-standard-1 \
@@ -56,7 +57,10 @@ gcloud compute instances create $INSTANCE \
  --subnet=default \
  --tags=$TAG_HTTP,$TAG_HTTPS \
  --labels=os=ubuntu-18-04-lts,cost-alloc=$INSTANCE,usage=development,configuration=v1-1-0
-``` 
+```
+
+- Go to `iam -> principal -> compute engine default service account -> add role -> Secret Manager Secret Accessor` (used for `Setup SSH private key from google secrets` step)
+
 - Go to `Google Console -> instance -> ssh` (open up a new popup terminal) and run following:
 ```sh
 sudo groupadd chrome-remote-desktop
@@ -78,4 +82,5 @@ gcloud compute instances delete $INSTANCE --zone=$REGION-b
 gcloud compute addresses delete $IP_NAME --region=$REGION
 gcloud compute firewall-rules delete $FIREWALL_HTTP
 gcloud compute firewall-rules delete $FIREWALL_HTTPS
+rm dev-machine.sh
 ```

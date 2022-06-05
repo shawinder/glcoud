@@ -19,6 +19,9 @@ sudo apt install -y --fix-broken
 # Cleanup remove the unnecessary file after the installation is done:
 rm chrome-remote-desktop_current_amd64.deb
 
+# install git
+sudo apt install -y git
+
 # install xcfe
 sudo DEBIAN_FRONTEND=noninteractive \
     apt install -y xfce4 xfce4-goodies desktop-base
@@ -57,7 +60,6 @@ sudo apt-get install -y google-cloud-sdk
 # Setup SSH private key from google secrets
 sudo gcloud secrets versions access 1 --secret="GITHUB-PRIVATE-KEY" > ~/.ssh/id_rsa
 sudo chmod 600 ~/.ssh/id_rsa
-ssh-add ~/.ssh/id_rsa
 
 # Install Visual Studio Code
 sudo snap install --classic code
